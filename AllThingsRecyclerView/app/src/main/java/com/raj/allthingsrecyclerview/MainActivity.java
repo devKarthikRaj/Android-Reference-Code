@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
-    private Adapter mAdapter;
+    private MyAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // recycler view uses the adapter class to access the data model...
         // so we need to pass the data model instance to the adapter to let it know which data model to access
-        mAdapter = new Adapter(dataModelInstance);
+        mAdapter = new MyAdapter(dataModelInstance);
 
         // Finally, assign the layout manager and adapter to the recycler view
         mRecyclerView.setLayoutManager(mLayoutManager);

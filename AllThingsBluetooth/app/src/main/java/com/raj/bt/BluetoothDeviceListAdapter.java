@@ -10,51 +10,52 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDeviceListAdapter.myViewHolder> {
-    private ArrayList<BluetoothDevice> mBluetoothDevice; // Creating an instance of the data model class
+public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDeviceListAdapter.MyViewHolder> {
+    private ArrayList<BluetoothDevice> mBTDevicesInfo;
 
-    // View holder class
-    public static class myViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTv1;
-        public TextView mTv2;
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView mBTName;
+        TextView mBTAddr;
 
-        // View holder holds the xml components displayed inside the recycler view
-        public myViewHolder(View itemView) {
-            super(itemView);
-
-            // Inside view holder, we need to bind the xml components to this adapter class
-            mTv1 = itemView.findViewById(R.id.tv1);
-            mTv2= itemView.findViewById(R.id.tv2);
+        public MyViewHolder(View v) {
+            super(v);
+            mBTName = itemView.findViewById(R.id.bt_name);
+            mBTAddr = itemView.findViewById(R.id.bt_mac_addr);
         }
     }
 
-    // onCreateViewHolder comes into play when recycler view is created...
+    // This "constructor" gets the data passed to this class when this class
+    // is called (i.e. an instance of this class is created in another class)
+    public BluetoothDeviceListAdapter(ArrayList<BluetoothDevice> btDevicesInfo) {
+        mBTDevicesInfo = btDevicesInfo;
+    }
+
+    // onCreateViewHolder is called when recycler view needs a new ViewHolder to represent an item)
     @Override
-    public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflate recyclerview_item layout file
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.devices_rv_item, parent, false);
-        // Create an instance of the view holder method (on top) and pass it the view v
-        myViewHolder itemViewHolder = new myViewHolder(v);
-        return itemViewHolder;
+    public BluetoothDeviceListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Inflate the recycler view item layout file which is in the main xml
+        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.devices_rv_item, parent, false);
+
+        // Create an instance of MyViewHolder and pass View v to it
+        MyViewHolder vh = new MyViewHolder(v);
+        return vh;
     }
 
-    public BluetoothDeviceListAdapter(ArrayList<BluetoothDevice> RecyclerViewList) {
-        mBluetoothDevice = RecyclerViewList;
-    }
-
-    // Get the data from the data model instance and display it in the recycler view
+    // Display stuff in the view inflated above in onCreateViewHolder
     @Override
-    public void onBindViewHolder(myViewHolder holder, int position) {
-        BluetoothDevice currentItem = mBluetoothDevice.get(position);
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        // Get the data of the "current item to be displayed" from the data model instance created earlier
+        // and store it in the "DataMode;" data type
+        BluetoothDevice currentItem = mBTDevicesInfo.get(position);
 
-        //get information from the data model using it getter methods
-        holder.mTv1.setText(currentItem.getName());
-        holder.mTv2.setText(currentItem.getAddress());
+        // Get the respective info from the data model class and display it in the "devices_rv_item" which is in in the main xml
+        holder.mBTName.setText(currentItem.getName());
+        holder.mBTAddr.setText(currentItem.getAddress());
     }
 
-    // data model size
+    // Return the size of your data model
     @Override
     public int getItemCount() {
-        return mBluetoothDevice.size();
+        return mBTDevicesInfo.size();
     }
 }
