@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PairedDevicesRVClickInterface{
     private static final String TAG = "MainActivity"; // For logging
 
     Button btnBtListPairedDevices;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize recycler view adapter and layout manager
         // to resolve no adapter attached skipping layout runtime error
-        mBluetoothDeviceListAdapter = new BluetoothDeviceListAdapter(mBTDevicesInfo);
+        mBluetoothDeviceListAdapter = new BluetoothDeviceListAdapter(mBTDevicesInfo, this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mBluetoothDeviceListAdapter);
 
@@ -103,8 +103,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // To display paired devices details in recycler view
-        mBluetoothDeviceListAdapter = new BluetoothDeviceListAdapter(mBTDevicesInfo);
+        mBluetoothDeviceListAdapter = new BluetoothDeviceListAdapter(mBTDevicesInfo, this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mBluetoothDeviceListAdapter);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        BluetoothDevice touchedDevice = mBTDevicesInfo.get(position);
+
+        String deviceName = touchedDevice.getName();
+        String deviceAdddress = touchedDevice.getAddress();
+
+        boolean btBondState = touchedDevice.createBond();
+        Toast.makeText(getApplicationContext(), Boolean.toString(btBondState),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLongItemClick(int position) {
+        //do nothing
     }
 }
