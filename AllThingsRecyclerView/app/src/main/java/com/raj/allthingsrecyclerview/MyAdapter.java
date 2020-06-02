@@ -14,6 +14,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ArrayList<DataModel> mDataModel;
     private RecyclerViewClickInterface mRecyclerViewClickInterface;
 
+    // Constructor
+    public MyAdapter(ArrayList<DataModel> dataModel, RecyclerViewClickInterface recyclerViewClickInterface) {
+        this.mDataModel = dataModel;
+        this.mRecyclerViewClickInterface = recyclerViewClickInterface;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView mTitle;
         TextView mDesc;
@@ -46,14 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             //---------------------------------------------------------------------------------------------------
         }
     }
-    /*
-        This "constructor" gets the data passed to this class when this class
-        is called (i.e. an instance of this class is created in another class)
-    */
-    public MyAdapter(ArrayList<DataModel> dataModel, RecyclerViewClickInterface recyclerViewClickInterface) {
-        this.mDataModel = dataModel;
-        this.mRecyclerViewClickInterface = recyclerViewClickInterface;
-    }
+
     /*
         onCreateViewHolder is called when recycler view needs a new ViewHolder to represent an item
         When ever a new item previously not visible, but just became visible cuz the user scrolled up/down - then the onCreateViewHolder

@@ -39,6 +39,7 @@ public class BluetoothConnectionService {
     public BluetoothConnectionService(Context context) {
         mContext = context;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        //
         start();
     }
 
@@ -151,14 +152,14 @@ public class BluetoothConnectionService {
                 // return on a successful connection or an exception
                 mmSocket.connect();
             } catch (IOException e) {
-                // Close the socket
                 Log.d(TAG, "ConnectThread: Failed to connect to socket created");
+
+                // Close the socket
                 try {
                     Log.d(TAG, "ConnectThread: Closing socket created");
                     mmSocket.close();
                 } catch (IOException ex) {
                     Log.d(TAG, "ConnectThread: Unable to close socket closed");
-                    ex.printStackTrace();
                 }
             }
 
@@ -261,6 +262,14 @@ public class BluetoothConnectionService {
                 try {
                     bytes = mmInStream.read(buffer);
                     String incomingMessage = new String(buffer, 0, bytes);
+
+                    Log.d(TAG, "ConnectedThread: Incoming message: " + incomingMessage);
+
+                    // not working part... sends received incoming message to main activity
+                    //Send the received message from remote device to the main activity through an intent!!!
+                    //Intent incomingMessageIntent = new Intent("incomingMessage");
+                    //incomingMessageIntent.putExtra("theMessage", incomingMessage);
+                    //LocalBroadcastManager.getInstance(mContext).sendBroadcast(incomingMessageIntent);
                 } catch (IOException e) {
                     Log.d(TAG, "ConnectedThread: All data received from from remote device");
                     break; //Leave the loop cuz there's nothing being received in the InputStream, no point listening to it anymore
@@ -274,8 +283,7 @@ public class BluetoothConnectionService {
             try {
                 mmOutStream.write(bytes);
             } catch (IOException e) {
-
-                e.printStackTrace();
+                Log.d(TAG, "ConnectedThread: Unable to write to remote device");
             }
         }
 
@@ -285,7 +293,6 @@ public class BluetoothConnectionService {
                 mmSocket.close();
             } catch (IOException e) {
                 Log.d(TAG, "cancel: Unable to shutdown the connection");
-                e.printStackTrace();
             }
         }
     }
@@ -323,6 +330,11 @@ public class BluetoothConnectionService {
 
         // Perform the write
         mConnectedThread.write(out);
+    }
+
+    // Cancels ConnectedThread
+    public void cancelConnectedThread() {
+        mConnectedThread.cancel();
     }
 
     // Cancels all threads

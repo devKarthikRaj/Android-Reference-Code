@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +28,14 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity implements PairedDevicesRVClickInterface{
     private static final String TAG = "MainActivity"; // For logging
 
+    TextView tvBTStatusMonitor;
     TextView tvMessageMonitor;
 
     EditText etMessageToSend;
 
     Button btnBtListPairedDevices;
     Button btnGoToBtSettings;
+    Button btnDisconnect;
     ImageButton btnSendMessage;
 
     BluetoothAdapter mBluetoothAdapter;
@@ -37,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
     ArrayList<BluetoothDevice> mBTDevicesInfo = new ArrayList<>();
     BluetoothConnectionService mBluetoothConnectionService;
     BluetoothDevice touchedDevice;
+    String remoteDeviceName;
+    String remoteDeviceAddress;
 
     RecyclerView rvPairedDevices;
     LinearLayoutManager mLayoutManager;
@@ -49,12 +57,15 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvMessageMonitor = (TextView) findViewById(R.id.tv_message_monitor);
+        tvBTStatusMonitor = (TextView) findViewById(R.id.tv_bt_status_monitor);
+        tvMessageMonitor = (TextView) findViewById(R.id.tv_bt_message_monitor);
+        tvMessageMonitor.setMovementMethod(new ScrollingMovementMethod());
 
         etMessageToSend = (EditText) findViewById(R.id.et_message_to_send);
 
         btnBtListPairedDevices = (Button) findViewById(R.id.btn_list_paired_devices);
         btnGoToBtSettings = (Button) findViewById(R.id.btn_goto_bt_settings);
+        btnDisconnect = (Button) findViewById(R.id.btn_disconnect);
         btnSendMessage = (ImageButton) findViewById(R.id.btn_send_message);
 
         // Initialize recycler view adapter and layout manager
@@ -72,9 +83,18 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         rvPairedDevices.setLayoutManager(mLayoutManager);
         rvPairedDevices.setAdapter(mBluetoothDeviceListAdapter);
 
+        // Intent to detect Bluetooth Connection Established with remote device
+        // ACTION_ACL_CONNECTED is used instead of BLUETOOTH_CONNECTION_STATE_CHANGED cuz the UUID used is weird (HC05 problems!!!)
+        IntentFilter BTConnectedToRemoteDeviceIntent = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+        registerReceiver(BTConnectedBroadcastReceiver, BTConnectedToRemoteDeviceIntent);
+
+        IntentFilter BTDisconnectedFromRemoteDeviceIntent = new IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        registerReceiver(BTDisonnectedBroadcastReceiver, BTDisconnectedFromRemoteDeviceIntent);
+
         // OnClickListeners
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                tvMessageMonitor.append("\n" + "> " + etMessageToSend.getText());
                 byte[] bytes = etMessageToSend.getText().toString().getBytes(Charset.defaultCharset());
                 mBluetoothConnectionService.write(bytes);
                 etMessageToSend.setText(null);
@@ -108,6 +128,13 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
                 etMessageToSend.setText("");
             }
         });
+
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                disconnect();
+            }
+        });
     }
 
     @Override
@@ -115,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         Log.d(TAG, "onDestroy: Called");
         mBluetoothConnectionService.cancelAllThreads(); // Cancel all threads running in BluetoothConnectionService
         mBluetoothAdapter.disable(); // Turn of Bluetooth
+        unregisterReceiver(BTConnectedBroadcastReceiver);
+        unregisterReceiver(BTDisonnectedBroadcastReceiver);
         super.onDestroy(); // Ultimate Destruction aka - Close the app!!!
     }
 
@@ -149,16 +178,6 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         rvPairedDevices.setAdapter(mBluetoothDeviceListAdapter);
     }
 
-    // ***Remember the connection will fail and app will crash if you attempt to connect to an unpaired device***
-    private void startConnection() {
-        startBtConnection(touchedDevice, MY_HC05_UUID);
-    }
-
-    // mBluetoothConnectionService.startClient method starts the ConnectThread which will attempt to make an outgoing connection
-    private void startBtConnection(BluetoothDevice device, UUID uuid) {
-        mBluetoothConnectionService.startClient(device, uuid);
-    }
-
     // Recycler View onItemClick method
     @Override
     public void onItemClick(int position) {
@@ -167,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
 
         touchedDevice = mBTDevicesInfo.get(position);
 
-        String deviceName = touchedDevice.getName();
-        String deviceAdddress = touchedDevice.getAddress();
+        remoteDeviceName = touchedDevice.getName();
+        remoteDeviceAddress = touchedDevice.getAddress();
 
         //connect to bluetooth bond
         mBTDevicesInfo.get(position).createBond();
@@ -181,4 +200,41 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
     public void onLongItemClick(int position) {
         //do nothing
     }
+
+    // ***Remember the connection will fail and app will crash if you attempt to connect to an unpaired device***
+    private void startConnection() {
+        mBluetoothConnectionService.startClient(touchedDevice, MY_HC05_UUID);
+    }
+
+    private void disconnect() {
+        mBluetoothConnectionService.cancelConnectedThread();
+    }
+
+    //Broadcast receiver to detect incoming message received (not working!!!)
+    /*
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String recMessage = intent.getStringExtra("theMessage");
+            tvMessageMonitor.append("\n< " + recMessage);
+        }
+    };
+     */
+
+    // Broadcast receivers to monitor Bluetooth connection status and update tvBTStatusMonitor
+    private final BroadcastReceiver BTConnectedBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            tvBTStatusMonitor.setText("Connected to " + remoteDeviceName);
+            tvMessageMonitor.setText(">_ Start of Comms with " + remoteDeviceName + " at " + remoteDeviceAddress);
+        }
+    };
+
+    private final BroadcastReceiver BTDisonnectedBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            tvBTStatusMonitor.setText("Disconnected from remote device");
+            tvMessageMonitor.setText(">_ End of comms with remote device");
+        }
+    };
 }

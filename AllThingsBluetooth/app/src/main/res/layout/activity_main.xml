@@ -16,23 +16,31 @@
         android:paddingRight="5dp">
 
         <TextView
-            android:id="@+id/bt_status_monitor"
+            android:id="@+id/tv_bt_status_monitor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Connecting to..."
+            android:padding="10dp"
+            android:text="Ready to connect to remote device..."
             android:textColor="#4CAF50"
-            android:textSize="20sp"
-            android:padding="10dp"/>
+            android:textColorHighlight="#4CAF50"
+            android:textColorHint="#4CAF50"
+            android:textColorLink="#4CAF50"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tv_message_monitor"
+            android:id="@+id/tv_bt_message_monitor"
             android:layout_width="match_parent"
-            android:text=">_"
             android:layout_height="200dp"
-            android:textColor="#4CAF50"
-            android:textSize="20sp"
+            android:background="#000050"
+            android:gravity="bottom"
+            android:maxLines="1000"
             android:padding="10dp"
-            android:background="#000050"/>
+            android:scrollbars="vertical"
+            android:text=">_"
+            android:textColor="#4CAF50"
+            android:textColorHighlight="#4CAF50"
+            android:textColorLink="#4CAF50"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,11 +53,14 @@
                 android:id="@+id/et_message_to_send"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#4CAF50"
                 android:ems="10"
                 android:text="Enter message to send here..."
                 android:textColor="#4CAF50"
-                android:textSize="20sp"
-                android:backgroundTint="#4CAF50"/>
+                android:textColorHighlight="#4CAF50"
+                android:textColorHint="#4CAF50"
+                android:textColorLink="#4CAF50"
+                android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/btn_send_message"
@@ -87,5 +98,17 @@
             android:background="#4CAF50"
             android:text="Pair New Devices"
             android:textSize="18sp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <Button
+            android:id="@+id/btn_disconnect"
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:background="#F44336"
+            android:text="Disconnect from remote device" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
