@@ -11,6 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
 
     BluetoothAdapter mBluetoothAdapter;
     BluetoothDeviceListAdapter mBluetoothDeviceListAdapter;
-    ArrayList<BluetoothDevice> mBTDevicesInfo = new ArrayList<>();
+    ArrayList<BluetoothDevice> mBTDevicesInfo = new ArrayList<>(); // Data model containing pair Bluetooth devices list (The phone has this data model in it!)
     BluetoothConnectionService mBluetoothConnectionService;
     BluetoothDevice touchedDevice;
     String remoteDeviceName;
@@ -57,33 +60,34 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvBTStatusMonitor = (TextView) findViewById(R.id.tv_bt_status_monitor);
-        tvMessageMonitor = (TextView) findViewById(R.id.tv_bt_message_monitor);
+        tvBTStatusMonitor = findViewById(R.id.tv_bt_status_monitor);
+        tvMessageMonitor = findViewById(R.id.tv_bt_message_monitor);
         tvMessageMonitor.setMovementMethod(new ScrollingMovementMethod());
 
-        etMessageToSend = (EditText) findViewById(R.id.et_message_to_send);
+        etMessageToSend = findViewById(R.id.et_message_to_send);
 
-        btnBtListPairedDevices = (Button) findViewById(R.id.btn_list_paired_devices);
-        btnGoToBtSettings = (Button) findViewById(R.id.btn_goto_bt_settings);
-        btnDisconnect = (Button) findViewById(R.id.btn_disconnect);
-        btnSendMessage = (ImageButton) findViewById(R.id.btn_send_message);
+        btnBtListPairedDevices = findViewById(R.id.btn_list_paired_devices);
+        btnGoToBtSettings = findViewById(R.id.btn_goto_bt_settings);
+        btnDisconnect = findViewById(R.id.btn_disconnect);
+        btnSendMessage = findViewById(R.id.btn_send_message);
 
         // Initialize recycler view adapter and layout manager
-        // to resolve no adapter attached skipping layout runtime error
+        //-
+        // To resolve no adapter attached skipping layout runtime error
         mBluetoothDeviceListAdapter = new BluetoothDeviceListAdapter(mBTDevicesInfo, this);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBTDevicesInfo = new ArrayList<>();
         enableBt(); // Enable Bluetooth "if its not already enabled"
-        mBluetoothConnectionService = new BluetoothConnectionService(MainActivity.this); // Start the BluetoothConnectionService Class
+        mBluetoothConnectionService = new BluetoothConnectionService(MainActivity.this, handler); // Start the BluetoothConnectionService Class
 
-        rvPairedDevices= (RecyclerView) findViewById(R.id.rv_paired_bt_devices);
-        rvPairedDevices.setHasFixedSize(true);
+        rvPairedDevices = findViewById(R.id.rv_paired_bt_devices);
+        rvPairedDevices.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvPairedDevices.setLayoutManager(mLayoutManager);
         rvPairedDevices.setAdapter(mBluetoothDeviceListAdapter);
 
-        // Intent to detect Bluetooth Connection Established with remote device
+        // Intent to detect Bluetooth Connection Established with remote device (Note: Intent Filters work hand in hand with broadcast receivers)
         // ACTION_ACL_CONNECTED is used instead of BLUETOOTH_CONNECTION_STATE_CHANGED cuz the UUID used is weird (HC05 problems!!!)
         IntentFilter BTConnectedToRemoteDeviceIntent = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
         registerReceiver(BTConnectedBroadcastReceiver, BTConnectedToRemoteDeviceIntent);
@@ -104,11 +108,10 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         btnBtListPairedDevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mBluetoothAdapter.isEnabled()) {
+                if (mBluetoothAdapter.isEnabled()) {
                     Log.d(TAG, "onClick: Listing paired devices (if any)");
                     ListPairedBtDevices();
-                }
-                else {
+                } else {
                     Toast.makeText(getBaseContext(), "Enable Bluetooth to view paired devices", Toast.LENGTH_SHORT).show();
                     enableBt();
                 }
@@ -122,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
             }
         });
 
+        // Basically... What this method does is to simply detect when you touch "Edit Text Message to Send" and clear the help text displayed
+        // in the edit text so that you can type in whatever you want to send over the link
         etMessageToSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
             }
         });
     }
-
     @Override
     protected void onDestroy() {
         Log.d(TAG, "onDestroy: Called");
@@ -235,6 +239,15 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         public void onReceive(Context context, Intent intent) {
             tvBTStatusMonitor.setText("Disconnected from remote device");
             tvMessageMonitor.setText(">_ End of comms with remote device");
+        }
+    };
+
+    public final Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            Bundle recBundle = msg.getData();
+            String incomingMessage = recBundle.getString("incomingMessage");
+            tvMessageMonitor.append("\n" + incomingMessage);
+            Log.d(TAG,"HandlerMsg: " + incomingMessage);
         }
     };
 }

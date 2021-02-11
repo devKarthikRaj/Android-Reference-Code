@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         mRecyclerView = findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
 
+        // Creating an instance of the LinearLayoutManager class
         mLayoutManager = new LinearLayoutManager(this);
 
         // recycler view uses the adapter class to access the data model...

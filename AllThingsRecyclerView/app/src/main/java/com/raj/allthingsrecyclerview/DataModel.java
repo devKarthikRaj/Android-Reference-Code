@@ -9,6 +9,8 @@ public class DataModel {
     private String mDesc;
 
     // Setter methods - The setter methods are used to add/edit data in the data model
+    // This is basically a constructor... Technically
+    // The java "add" method can be used to add data and the
     public DataModel(String title, String desc) {
         mTitle = title;
         mDesc = desc;

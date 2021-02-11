@@ -6,12 +6,19 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PushbackInputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class BluetoothConnectionService {
@@ -20,6 +27,8 @@ public class BluetoothConnectionService {
     private static final String appName = "AllThingsBluetooth";
 
     private Context mContext;
+
+    private Handler mHandler;
 
     private final BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mmDevice;
@@ -36,8 +45,9 @@ public class BluetoothConnectionService {
     private ProgressDialog mProgressDialog;
 
     //Constructor for the entire BluetoothConnectionService Class
-    public BluetoothConnectionService(Context context) {
+    public BluetoothConnectionService(Context context, Handler handler) {
         mContext = context;
+        mHandler = handler;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //
         start();
@@ -203,7 +213,7 @@ public class BluetoothConnectionService {
     }
 
     /*
-     * The ConnectedThread comes into play once when the connect method is connected method is called from AcceptThread or ConnectThread after
+     * The ConnectedThread comes into play once the connected method is called from AcceptThread or ConnectThread after
      * a connection has successfully been established with a remote device
      *
      * The ConnectedThread is responsible for:
@@ -260,18 +270,30 @@ public class BluetoothConnectionService {
             while(true) {
                 // Read from the InputStream
                 try {
-                    bytes = mmInStream.read(buffer);
-                    String incomingMessage = new String(buffer, 0, bytes);
+                    PushbackInputStream pushbackInputStream = new PushbackInputStream(mmInStream);
+                    if(pushbackInputStream.available() != 0 && pushbackInputStream.read(buffer,0,1) != -1) {
+                        pushbackInputStream.unread(buffer,0,1);
+                        bytes = pushbackInputStream.read(buffer);
 
-                    Log.d(TAG, "ConnectedThread: Incoming message: " + incomingMessage);
+                        int stop = bytes ;
+                        for(int i : buffer) {
+                            if(buffer[i] == 10) {
+                                stop = i-1;
+                            }
+                        }
 
-                    // not working part... sends received incoming message to main activity
-                    //Send the received message from remote device to the main activity through an intent!!!
-                    //Intent incomingMessageIntent = new Intent("incomingMessage");
-                    //incomingMessageIntent.putExtra("theMessage", incomingMessage);
-                    //LocalBroadcastManager.getInstance(mContext).sendBroadcast(incomingMessageIntent);
+                        String incomingMessage = new String(buffer, 0, stop);
+                        Log.d(TAG, "ConnectedThread: Incoming message: " +incomingMessage);
+                        Log.d(TAG, "ConnectedThread: Buffer Contents: " + buffer[0] + "," + buffer[1] + "," + buffer[2] + "," + buffer[3] + "," + buffer[4] + "," + buffer[5] + "," + buffer[6] + "," + buffer[7] + "," + buffer[8] + "," + buffer[9] + "," + buffer[10] + "," + buffer[11] + "," + buffer[12]);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("incomingMessage", incomingMessage);
+                        Message msg = new Message();
+                        msg.setData(bundle);
+                        mHandler.sendMessage(msg);
+                    }
                 } catch (IOException e) {
-                    Log.d(TAG, "ConnectedThread: All data received from from remote device");
+                    Log.d(TAG, "ConnectedThread: All data received from from remote device " + e);
                     break; //Leave the loop cuz there's nothing being received in the InputStream, no point listening to it anymore
                 }
             }
@@ -298,7 +320,7 @@ public class BluetoothConnectionService {
     }
 
     // This method is called from AcceptThread and ConnectThread after a connection has successfully been established with a remote device
-    // All this method does is basically... just starts the ConnectedThread
+    // All this method does is basically... Start the ConnectedThread
     private void connected(BluetoothSocket mmSocket, BluetoothDevice mmDevice) {
         // Start ConnectedThread to manage the connection and perform transmission
         mConnectedThread = new ConnectedThread(mmSocket);
@@ -326,7 +348,7 @@ public class BluetoothConnectionService {
      */
     public void write(byte[] out) {
         // Create temporary object
-        ConnectedThread r;
+        //ConnectedThread r;
 
         // Perform the write
         mConnectedThread.write(out);
