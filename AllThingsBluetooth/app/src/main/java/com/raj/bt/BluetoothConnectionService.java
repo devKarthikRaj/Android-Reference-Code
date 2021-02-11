@@ -8,17 +8,14 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PushbackInputStream;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class BluetoothConnectionService {
@@ -260,7 +257,7 @@ public class BluetoothConnectionService {
 
             byte[] buffer = new byte[1024]; // Buffer store for the stream - Basically this is a byte array that can store 1024 bytes
 
-            int bytes; // To store bytes returned from read()
+            int numBytes; // To store the number of bytes returned from read()
 
             // Keep listening to the InputStream until an exception occurs
             // One of the cases in which the exception might be thrown is when buffer is null, a NullPointerException will be thrown,
@@ -269,28 +266,55 @@ public class BluetoothConnectionService {
 
             while(true) {
                 // Read from the InputStream
+                // Reading from the InputStream is a complicated process!!!
+                // This stuff is not intuitive and quite confusing!!!
+                /* The gist of it:
+                    >The input stream has data received from the remote device
+
+                    >We are converting the input stream to a push back input stream... this push back input stream
+                    lets read one byte of the data to check if we have reached the end of stream (this checking
+                    is done in the if statement) it so that we can read that one byte of data again when actually
+                    reading it to display to user in the UI
+
+                    >So... if data is available in the input stream and we haven't reached the end of the input stream
+                    We can finally read the data in the form of bytes from the input stream. The data is stored in the
+                    the buffer (byte array) and the number of bytes is stored in bytes
+
+                    >Okay now we have our data stored in the buffer. But this buffer has some old data as well. The new
+                    data has just been overwritten over the old data (this is what I meant by messy buffer)
+
+                    >Although there is a way of organizing this... basically all data sent has a NL character aka 10 in
+                    ASCII code at the end of the transmission... So we only have to read the buffer from element 0 to the
+                    element before the NL char.
+
+                    >Once that's done... just convert those latest bytes in the buffer to a String and pass it to the UI
+                    activity through the handler... Done!!!
+                */
                 try {
                     PushbackInputStream pushbackInputStream = new PushbackInputStream(mmInStream);
                     if(pushbackInputStream.available() != 0 && pushbackInputStream.read(buffer,0,1) != -1) {
                         pushbackInputStream.unread(buffer,0,1);
-                        bytes = pushbackInputStream.read(buffer);
+                        numBytes = pushbackInputStream.read(buffer);
 
-                        int stop = bytes ;
+                        //Finding how many bytes in the buffer are the from the latest data received
+                        int lastRxByte = numBytes ;
                         for(int i : buffer) {
                             if(buffer[i] == 10) {
-                                stop = i-1;
+                                lastRxByte = i-1;
                             }
                         }
-
-                        String incomingMessage = new String(buffer, 0, stop);
+                        //Convert the latest received bytes to String
+                        String incomingMessage = new String(buffer, 0, lastRxByte);
                         Log.d(TAG, "ConnectedThread: Incoming message: " +incomingMessage);
-                        Log.d(TAG, "ConnectedThread: Buffer Contents: " + buffer[0] + "," + buffer[1] + "," + buffer[2] + "," + buffer[3] + "," + buffer[4] + "," + buffer[5] + "," + buffer[6] + "," + buffer[7] + "," + buffer[8] + "," + buffer[9] + "," + buffer[10] + "," + buffer[11] + "," + buffer[12]);
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("incomingMessage", incomingMessage);
-                        Message msg = new Message();
-                        msg.setData(bundle);
-                        mHandler.sendMessage(msg);
+                        //Send the data received from this thread that's running in the background through
+                        //the handler to the UI activity to be displayed to the user
+                        //The handler can only send "Message" which is a data type to another activity
+                        Bundle bundle = new Bundle(); //So we create a bundle which is an attribute of the Message type
+                        bundle.putString("incomingMessage", incomingMessage); //Put the string into the bundle
+                        Message msg = new Message(); //Create an empty message that has an empty bundle attribute
+                        msg.setData(bundle); //Put the bundle in the message
+                        mHandler.sendMessage(msg); //Send the message to the handler
                     }
                 } catch (IOException e) {
                     Log.d(TAG, "ConnectedThread: All data received from from remote device " + e);

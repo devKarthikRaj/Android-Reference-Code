@@ -4,15 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
 
         tvBTStatusMonitor = findViewById(R.id.tv_bt_status_monitor);
         tvMessageMonitor = findViewById(R.id.tv_bt_message_monitor);
-        tvMessageMonitor.setMovementMethod(new ScrollingMovementMethod());
 
         etMessageToSend = findViewById(R.id.et_message_to_send);
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         // OnClickListeners
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                tvMessageMonitor.append("\n" + "> " + etMessageToSend.getText());
+                tvMessageMonitor.append("\n" + "> " + etMessageToSend.getText() + "\n");
                 byte[] bytes = etMessageToSend.getText().toString().getBytes(Charset.defaultCharset());
                 mBluetoothConnectionService.write(bytes);
                 etMessageToSend.setText(null);
@@ -229,24 +229,34 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
     private final BroadcastReceiver BTConnectedBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            tvBTStatusMonitor.setText("Connected to " + remoteDeviceName);
-            tvMessageMonitor.setText(">_ Start of Comms with " + remoteDeviceName + " at " + remoteDeviceAddress);
+            Resources resources = getResources();
+
+            tvBTStatusMonitor.setText(R.string.connected_to_text);
+            tvBTStatusMonitor.append(" ");
+            tvBTStatusMonitor.append(String.format(resources.getString(R.string.remote_device_name), remoteDeviceName));
+
+            tvMessageMonitor.setText(R.string.start_of_comms_text );
+            tvMessageMonitor.append(" ");
+            tvMessageMonitor.append(String.format(resources.getString(R.string.remote_device_name), remoteDeviceName));
+            tvMessageMonitor.append("\n");
         }
     };
 
     private final BroadcastReceiver BTDisonnectedBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            tvBTStatusMonitor.setText("Disconnected from remote device");
-            tvMessageMonitor.setText(">_ End of comms with remote device");
+            tvBTStatusMonitor.setText(R.string.disconnected_text);
+            tvMessageMonitor.setText(R.string.end_of_comms_text);
         }
     };
 
+    @SuppressLint("HandlerLeak")
     public final Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             Bundle recBundle = msg.getData();
             String incomingMessage = recBundle.getString("incomingMessage");
-            tvMessageMonitor.append("\n" + incomingMessage);
+            Resources resources = getResources();
+            tvMessageMonitor.append("\n" + String.format(resources.getString(R.string.remote_device_name), remoteDeviceName) + ": " + incomingMessage);
             Log.d(TAG,"HandlerMsg: " + incomingMessage);
         }
     };
