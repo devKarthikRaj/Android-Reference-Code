@@ -8,14 +8,16 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +30,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
+
+//This must be imported for binding to the BluetoothConnectionService
+import com.raj.bt.BluetoothConnectionService.LocalBinder;
 
 public class MainActivity extends AppCompatActivity implements PairedDevicesRVClickInterface{
     private static final String TAG = "MainActivity"; // For logging
@@ -45,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
     BluetoothAdapter mBluetoothAdapter;
     BluetoothDeviceListAdapter mBluetoothDeviceListAdapter;
     ArrayList<BluetoothDevice> mBTDevicesInfo = new ArrayList<>(); // Data model containing pair Bluetooth devices list (The phone has this data model in it!)
-    BluetoothConnectionService mBluetoothConnectionService;
     BluetoothDevice touchedDevice;
     String remoteDeviceName;
     String remoteDeviceAddress;
@@ -55,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
 
     // This UUID is specially for use with HC05 Bluetooth Modules (Yet to be tested for other devices)
     private static final UUID MY_HC05_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
+    //Service
+    BluetoothConnectionService mBluetoothConnectionService;
+    boolean isBound = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,22 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         btnDisconnect = findViewById(R.id.btn_disconnect);
         btnSendMessage = findViewById(R.id.btn_send_message);
 
+        //Bind to service
+        /*
+        * Could simply just do this instead of bind:
+        * mBluetoothConnectionService = new BluetoothConnectionService(MainActivity.this, handler); // Start the BluetoothConnectionService Class
+        * But this is not a good way to do it cuz if you have to access the BluetoothConnectionService from multiple activites then you'll
+        * be forced to create multiple instances of the BluetoothConnectionService from these multiple activities
+        *
+        * But once a service is alr started in the activity that you are first creating an instance of it from... its stuck with that
+        * activity... So...
+        *
+        * I am "binding" to the service instead of creating an instance of the service... apparently somehow android does some black magic
+        * (im actually just lazy to explain the mechanism at work here but yeah)... this way we can access the service from multiple
+        * activites and the service will only start once... Problem solved!!!*/
+        Intent serviceIntent = new Intent(this, BluetoothConnectionService.class);
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+
         // Initialize recycler view adapter and layout manager
         //-
         // To resolve no adapter attached skipping layout runtime error
@@ -78,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBTDevicesInfo = new ArrayList<>();
         enableBt(); // Enable Bluetooth "if its not already enabled"
-        mBluetoothConnectionService = new BluetoothConnectionService(MainActivity.this, handler); // Start the BluetoothConnectionService Class
+
 
         rvPairedDevices = findViewById(R.id.rv_paired_bt_devices);
         rvPairedDevices.setHasFixedSize(false);
@@ -141,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         Log.d(TAG, "onDestroy: Called");
@@ -260,4 +285,38 @@ public class MainActivity extends AppCompatActivity implements PairedDevicesRVCl
             Log.d(TAG,"HandlerMsg: " + incomingMessage);
         }
     };
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LocalBinder mBinder = (LocalBinder) service;
+            mBluetoothConnectionService = mBinder.getService();
+
+            //Can't pass the handler through the construtor of the service class (no point having a constructor in a service class so
+            //we gotta pass it through a method that I coded into the service (something like a setter method)
+            mBluetoothConnectionService.setHandler(handler);
+
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+        }
+    };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

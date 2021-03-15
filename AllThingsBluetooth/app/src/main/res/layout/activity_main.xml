@@ -74,8 +74,8 @@
                 <ImageButton
                     android:id="@+id/btn_send_message"
                     android:contentDescription="@string/send_button_content_desc"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="5"
                     android:background="@drawable/send_button_icon" />
@@ -126,15 +126,15 @@
                 android:layout_height="20dp" />
 
             <Button
-                android:id="@+id/btn_disconnect"
-                android:layout_width="380dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_corner"
-                android:fontFamily="@font/acme"
-                android:text="@string/btn_disconnect_text"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+            android:id="@+id/btn_disconnect"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/acme"
+            android:text="@string/btn_disconnect_text"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 

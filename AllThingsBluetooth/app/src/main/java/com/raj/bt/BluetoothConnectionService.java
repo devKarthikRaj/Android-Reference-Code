@@ -1,13 +1,15 @@
 package com.raj.bt;
 
-import android.app.ProgressDialog;
+import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
+import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
@@ -18,14 +20,18 @@ import java.io.PushbackInputStream;
 import java.nio.charset.Charset;
 import java.util.UUID;
 
-public class BluetoothConnectionService {
+public class BluetoothConnectionService extends Service {
     private static final String TAG = "BtConnService";
 
     private static final String appName = "AllThingsBluetooth";
 
-    private Context mContext;
+    //private Context mContext;
 
     private Handler mHandler;
+    public void setHandler(Handler handler)
+    {
+        mHandler = handler;
+    }
 
     private final BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mmDevice;
@@ -39,12 +45,25 @@ public class BluetoothConnectionService {
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
 
-    private ProgressDialog mProgressDialog;
+    //Bound service initialization
+    //Local binder which is private to this class... called through the onBind method
+    private final IBinder mBinder = new LocalBinder();
+
+    //Defining the local binder class that is instantiated above ^
+    //This is the code that runs when the getService method is called
+    public class LocalBinder extends Binder {
+        BluetoothConnectionService getService() {
+            return BluetoothConnectionService.this;
+        }
+    }
+
+    //onBind is called when an activity binds with this service
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
 
     //Constructor for the entire BluetoothConnectionService Class
-    public BluetoothConnectionService(Context context, Handler handler) {
-        mContext = context;
-        mHandler = handler;
+    public BluetoothConnectionService() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //
         start();
@@ -234,13 +253,6 @@ public class BluetoothConnectionService {
             // The Java OutputStream class, java.io.OutputStream, accepts output bytes and sends them to some link.
             OutputStream tmpOut = null;
 
-            // Dismiss the progress dialog when connection is established
-            try {
-                mProgressDialog.dismiss();
-            } catch (Exception e) {
-                Log.d(TAG, "ConnectedThread: Unable to dismiss progress dialog");
-            }
-
             try {
                 tmpIn = mmSocket.getInputStream();
                 tmpOut = mmSocket.getOutputStream();
@@ -357,7 +369,7 @@ public class BluetoothConnectionService {
     // This method is called from the mainActivity when the user wants to initiate (start) a connection with a remote device
     public void startClient(BluetoothDevice device, UUID uuid) {
         // Open Progress Dialog while ConnectThread is running... Progress Dialog will be dismissed by the ConnectedThread
-        mProgressDialog = ProgressDialog.show(mContext, "Connecting Bluetooth", "Please Wait..", true);
+        //mProgressDialog = ProgressDialog.show(getBaseContext(), "Connecting Bluetooth", "Please Wait..", true);
 
         // Start the ConnectThread to attempt an outgoing connection to a remote device
         mConnectThread = new ConnectThread(device, uuid);
