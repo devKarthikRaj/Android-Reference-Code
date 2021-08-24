@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSendNotifCh2.setOnClickListener(this);
     }
 
+    //Call this function to send a notification on channel 1
     public void sendOnChannel1(View v) {
+        //Get text from edit text
         String notifTitle = etNotifTitle.getText().toString();
         String notifDesc = etNotifDesc.getText().toString();
 
+        //Build the notification however you want it
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(notifTitle)
@@ -49,13 +52,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
 
+        //This line is the line that actually sends the notification
         notificationManagerCompat.notify(1, notification);
     }
 
+    //Call this function to send a notification on channel 2
     public void sendOnChannel2(View v) {
+        //Get text from edit text
         String notifTitle = etNotifTitle.getText().toString();
         String notifDesc = etNotifDesc.getText().toString();
 
+        //Build the notification however you want it
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(notifTitle)
@@ -63,9 +70,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .build();
 
+        //This line is the line that actually sends the notification
         notificationManagerCompat.notify(2, notification);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch(view.getId()) {

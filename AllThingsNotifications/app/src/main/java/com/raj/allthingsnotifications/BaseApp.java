@@ -5,6 +5,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
+//This class runs at the start of the app's lifecycle (this is defined in the manifest
+//We are starting all the notification channels that we want to use in this app here... at the start of the app's lifecycle (its recc this way)
+
 public class BaseApp extends Application {
     public final static String CHANNEL_1_ID = "channel1";
     public final static String CHANNEL_2_ID = "channel2";

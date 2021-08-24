@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.raj.allthingsnotifications">
 
+    <!-- What is android:name in the <application> tag? When the application process is started... this class is instantiated before
+        any of the application's components... Its basically a class that runs at the start of the app's lifecycle -->
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
