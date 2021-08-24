@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:padding="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/ET_Notif_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Enter Notification Title..."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:padding="10dp" />
+        <EditText
+            android:id="@+id/ET_Notif_Desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Enter Notification Description..."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/BTN_Send_On_Ch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Send Notifcation on Channel 1"
+            android:textColor="#000000"
+            app:rippleColor="#A79090" />
+
+        <Button
+            android:id="@+id/BTN_Send_On_Ch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Send Notifcation on Channel 2"
+            android:textColor="#000000"
+            app:rippleColor="#A79090" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
