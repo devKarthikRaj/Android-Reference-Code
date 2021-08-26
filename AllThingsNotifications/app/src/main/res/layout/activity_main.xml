@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Send Notifcation on Channel 1"
+            android:text="Bare bone notification"
             android:textColor="#000000"
             app:rippleColor="#A79090" />
 
@@ -55,7 +55,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Send Notifcation on Channel 2"
+            android:text="Clickable notif with button to toast"
+            android:textColor="#000000"
+            app:rippleColor="#A79090" />
+
+        <Button
+            android:id="@+id/BTN_Send_On_Ch3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Big text style notif with image"
+            android:textColor="#000000"
+            app:rippleColor="#A79090" />
+
+        <Button
+            android:id="@+id/BTN_Send_On_Ch4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Inbox style notif"
             android:textColor="#000000"
             app:rippleColor="#A79090" />
 

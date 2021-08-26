@@ -11,6 +11,8 @@ import android.os.Build;
 public class BaseApp extends Application {
     public final static String CHANNEL_1_ID = "channel1";
     public final static String CHANNEL_2_ID = "channel2";
+    public final static String CHANNEL_3_ID = "channel3";
+    public final static String CHANNEL_4_ID = "channel4";
 
     @Override
     public void onCreate() {
@@ -27,9 +29,17 @@ public class BaseApp extends Application {
             NotificationChannel channel2 = new NotificationChannel(CHANNEL_2_ID,"Channel 2",NotificationManager.IMPORTANCE_LOW);
             channel1.setDescription("This is notification channel 2");
 
+            NotificationChannel channel3 = new NotificationChannel(CHANNEL_3_ID,"Channel 3",NotificationManager.IMPORTANCE_LOW);
+            channel1.setDescription("This is notification channel 3");
+
+            NotificationChannel channel4 = new NotificationChannel(CHANNEL_4_ID,"Channel 4",NotificationManager.IMPORTANCE_LOW);
+            channel1.setDescription("This is notification channel 4");
+
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel1);
             notificationManager.createNotificationChannel(channel2);
+            notificationManager.createNotificationChannel(channel3);
+            notificationManager.createNotificationChannel(channel4);
         }
     }
 }
