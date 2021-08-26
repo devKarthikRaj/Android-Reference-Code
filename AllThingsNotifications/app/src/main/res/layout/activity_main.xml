@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/rootlinearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -74,6 +74,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Inbox style notif"
+            android:textColor="#000000"
+            app:rippleColor="#A79090" />
+
+        <Button
+            android:id="@+id/BTN_Send_On_Ch5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Big pic notif"
+            android:textColor="#000000"
+            app:rippleColor="#A79090" />
+
+        <Button
+            android:id="@+id/BTN_Send_On_Ch6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Media style notif"
             android:textColor="#000000"
             app:rippleColor="#A79090" />
 

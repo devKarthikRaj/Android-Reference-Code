@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnSendNotifCh2;
     private Button btnSendNotifCh3;
     private Button btnSendNotifCh4;
+    private Button btnSendNotifCh5;
+    private Button btnSendNotifCh6;
+
+    private MediaSessionCompat mediaSession; //Media style notif... Like the spotify notif... Incase you ever gotta do a media player or somethin' like that
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +46,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSendNotifCh2 = findViewById(R.id.BTN_Send_On_Ch2);
         btnSendNotifCh3 = findViewById(R.id.BTN_Send_On_Ch3);
         btnSendNotifCh4 = findViewById(R.id.BTN_Send_On_Ch4);
+        btnSendNotifCh5 = findViewById(R.id.BTN_Send_On_Ch5);
+        btnSendNotifCh6 = findViewById(R.id.BTN_Send_On_Ch6);
+
+        mediaSession = new MediaSessionCompat(this, "tag"); //Config media session
 
         btnSendNotifCh1.setOnClickListener(this);
         btnSendNotifCh2.setOnClickListener(this);
         btnSendNotifCh3.setOnClickListener(this);
         btnSendNotifCh4.setOnClickListener(this);
+        btnSendNotifCh5.setOnClickListener(this);
+        btnSendNotifCh6.setOnClickListener(this);
     }
 
     //Bare bone notification with title and desc
@@ -64,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         //This line is the line that actually sends the notification
-        notificationManagerCompat.notify(2, notification);
+        notificationManagerCompat.notify(1, notification);
     }
 
     //Notif that goes to an activity in your app when clicked and notif that has a button on it that when clicked displays a toast
@@ -100,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         //This line is the line that actually sends the notification
-        notificationManagerCompat.notify(1, notification);
+        notificationManagerCompat.notify(2, notification);
     }
 
     //Big text style notif with image (large icon)
@@ -126,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         //This line is the line that actually sends the notification
-        notificationManagerCompat.notify(2, notification);
+        notificationManagerCompat.notify(3, notification);
     }
 
     //Inbox style notif
@@ -153,7 +164,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
 
         //This line is the line that actually sends the notification
-        notificationManagerCompat.notify(2, notification);
+        notificationManagerCompat.notify(4, notification);
+    }
+
+    //Big picture only notif
+    public void sendOnChannel5(View v) {
+        //Get text from edit text
+        String notifTitle = etNotifTitle.getText().toString();
+        String notifDesc = etNotifDesc.getText().toString();
+
+        Bitmap bigPic = BitmapFactory.decodeResource(getResources(), R.drawable.howard_wolowitz);
+
+        //Build the notification however you want it
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle(notifTitle)
+                .setContentText(notifDesc)
+                .setLargeIcon(bigPic)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                          .bigPicture(bigPic)
+                          .bigLargeIcon(null)) //this bit will prevent the large icon from fading out when the notif expanded
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .build();
+
+        //This line is the line that actually sends the notification
+        notificationManagerCompat.notify(5, notification);
+    }
+
+    //Media style notif (like on spotify) but no actual music playing functionality (and the buttons dont do anything)
+    public void sendOnChannel6(View v) {
+        //Get text from edit text
+        String notifTitle = etNotifTitle.getText().toString();
+        String notifDesc = etNotifDesc.getText().toString();
+
+        Bitmap palettePic = BitmapFactory.decodeResource(getResources(), R.drawable.penny_hofstadter);
+
+        //Build the notification however you want it
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle(notifTitle)
+                .setLargeIcon(palettePic)
+                .addAction(R.drawable.icon_car, "Car", null)  //These are the small buttons on the notif... They dont do anything...
+                .addAction(R.drawable.icon_train, "Train", null) //If you want them to do something... Can pass a pendingIntent with
+                .addAction(R.drawable.icon_boat, "Boat", null)   //a broadcast rec like channel 2
+                .addAction(R.drawable.icon_airplane, "Airplane", null)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
+                          .setShowActionsInCompactView(1,2,3) // 4 small buttons 0,1,2,3... this bit will make 1,2,3 be displayed when notif is not expanded
+                          .setMediaSession(mediaSession.getSessionToken()))
+                .setSubText("Sub Text")
+                .setContentText(notifDesc)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .build();
+
+        //This line is the line that actually sends the notification
+        notificationManagerCompat.notify(6, notification);
     }
 
 
@@ -173,6 +237,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.BTN_Send_On_Ch4:
                 sendOnChannel4(view);
+                break;
+            case R.id.BTN_Send_On_Ch5:
+                sendOnChannel5(view);
+                break;
+            case R.id.BTN_Send_On_Ch6:
+                sendOnChannel6(view);
                 break;
         }
     }
