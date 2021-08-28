@@ -10,10 +10,10 @@ ___
 
 ## Contents <br>
 ### Existing Reference Code <br>
-[Bluetooth](../AllThingsBluetooth) <br>
-[Notifications](../AllThingsNotifications) <br>
-[Pop Up Dialog](../AllThingsPopUpDialog) <br>
-[Recycler View](../AllThingsRecyclerView) <br>
+[Bluetooth](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBluetooth) <br>
+[Notifications](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNotifications) <br>
+[Pop Up Dialog](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPopUpDialog) <br>
+[Recycler View](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsRecyclerView) <br>
 
 ### Upcoming Reference Code
 Broadcast Receivers <br>
