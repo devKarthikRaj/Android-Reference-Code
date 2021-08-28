@@ -1,6 +1,3 @@
-##Questions and Requests
-Drop me a message on (https://www.linkedin.com/in/karthikraj-eee/ "LinkedIn") and I'll get back to you as soon as I can!
-
 # Android Reference Code
 ##What?
 This repository contains android code in Java for your reference! You can literally copy and paste the code from here into your project and expect it to work (you'll probably have to tweak it here and there just a lil' bit).
@@ -13,10 +10,10 @@ ___
 
 ##Contents
 ###Existing Reference Code
-(../AllThingsBluetooth "Bluetooth") <br>
-(../AllThingsNotifications "Notifications") <br>
-(../AllThingsPopUpDialog "Pop Up Dialog) <br>
-(../AllThingsRecyclerView "Recycler View") <br>
+[Bluetooth](../AllThingsBluetooth) <br>
+[Notifications](../AllThingsNotifications) <br>
+[Pop Up Dialog](../AllThingsPopUpDialog) <br>
+[Recycler View](../AllThingsRecyclerView) <br>
 
 ###Upcoming Reference Code
 ("Broadcast Receivers")
@@ -29,4 +26,4 @@ ___
 ___
 
 ##Questions and Requests
-Drop me a message on (https://www.linkedin.com/in/karthikraj-eee/ "LinkedIn") and I'll get back to you as soon as I can!
+Drop me a message on [LinkedIn](https://www.linkedin.com/in/karthikraj-eee/) and I'll get back to you as soon as I can!
