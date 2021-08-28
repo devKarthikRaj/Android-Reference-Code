@@ -16,12 +16,12 @@ ___
 [Recycler View](../AllThingsRecyclerView) <br>
 
 ###Upcoming Reference Code
-("Broadcast Receivers")
-("Service") <br>
-("Threads") <br>
-("Async Task") <br>
-("Google Maps") <br>
-("Palette") <br>
+Broadcast Receivers <br>
+Service <br>
+Threads <br>
+Async Task <br>
+Google Maps <br>
+Palette <br>
 
 ___
 
