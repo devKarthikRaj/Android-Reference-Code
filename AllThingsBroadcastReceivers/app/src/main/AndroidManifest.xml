@@ -17,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- register explicit custom broadcast receiver -->
+        <receiver android:name=".ExplicitCustomBroadcastReceiver" />
     </application>
 
 </manifest>

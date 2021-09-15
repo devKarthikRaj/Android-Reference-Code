@@ -9,12 +9,13 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 /* Broadcast receivers can be implicit or explicit
  * Implicit: Implicit ~ implied ~ suggested but not directly expressed...
- *           Target all apps and not just our app or apps created by us... Ex: System broadcasts!
+ *           Target all apps... Ex: System broadcasts!
+ *           Implicit broadcasts are not recommended by Android! Especially, do not broadcast sensitive info with implicit! Try not to use em!
+*            Its not not good to send sensitive stuff through implicit because all apps can access this implicit info
  * Explicit: Explicit ~ stated clearly
- *           Target our app only or apps created by us
+ *           Target our app
  *
  * Broadcast receivers can be "REGISTERED" as static or dynamic:
  * Static: Registered in the manifest file with an action specified
@@ -22,8 +23,9 @@ import android.widget.Toast;
  */
 
 /* Stuff that is going on in this project...
- * When wifi is turned on or off... toast is triggered by an implicit dynamic broadcast receiver
- * When a green button is pressed... toast is triggered by an implicit custom broadcast receiver
+ * When wifi is turned on or off... toast is triggered by an implicit system broadcast receiver registered dynamically
+ * When green button is pressed... toast is triggered by an implicit custom broadcast receiver registered dynamically
+ * When orange button is pressed... toast is triggered by an explicit custom broadcast receiver registered dynamically
  */
 
 /* Rule of thumb for DYNAMIC broadcast receiver (applicable to most cases... not all cases... this is not universal)
@@ -38,9 +40,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ConnectivityStatusBroadcastReceiver connectivityStatusBroadcastReceiver = new ConnectivityStatusBroadcastReceiver();
-    CustomBroadcastReceiver customBroadcastReceiver = new CustomBroadcastReceiver();
+    ImplicitCustomBroadcastReceiver customBroadcastReceiver = new ImplicitCustomBroadcastReceiver();
 
     Button sendImplicitCustomBroadcastBtn;
+    Button sendExplicitCustomBroadcastBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sendImplicitCustomBroadcastBtn = findViewById(R.id.BTN_Send_Implicit_Custom_Broadcast);
         sendImplicitCustomBroadcastBtn.setOnClickListener(this);
+
+        sendExplicitCustomBroadcastBtn = findViewById(R.id.BTN_Send_Explicit_Custom_Broadcast);
+        sendExplicitCustomBroadcastBtn.setOnClickListener(this);
 
         //Register custom broadcast receiver
         IntentFilter customIntentFilter = new IntentFilter("com.raj.allthingsbroadcastreceivers.EXAMPLE_ACTION");
@@ -88,13 +94,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.BTN_Send_Implicit_Custom_Broadcast:
                 sendImplicitCustomBroadcast(view);
                 break;
+
+            case R.id.BTN_Send_Explicit_Custom_Broadcast:
+                sendExplicitCustomBroadcast(view);
+                break;
         }
     }
 
     //This method can also be put in another app... and send this broadcast with the same action name from other app and receive the broadcast in this app.. Inter-phone comms!
     private void sendImplicitCustomBroadcast(View view) {
         Intent intent = new Intent("com.raj.allthingsbroadcastreceivers.EXAMPLE_ACTION");
-        intent.putExtra("com.raj.allhthingsbroadcastreceivers.EXTRA_TEXT", "Broadcast received");
+        intent.putExtra("com.raj.allhthingsbroadcastreceivers.EXTRA_TEXT", "Implicit broadcast receiver triggered!!!");
         sendBroadcast(intent);
+    }
+
+    private void sendExplicitCustomBroadcast(View view) {
+        Intent intent = new Intent(this, ExplicitCustomBroadcastReceiver.class);
+        intent.putExtra("com.raj.allhthingsbroadcastreceivers.EXTRA_TEXT", "Explicit broadcast receiver triggered!!!");
+        sendBroadcast(intent);
+
     }
 }
