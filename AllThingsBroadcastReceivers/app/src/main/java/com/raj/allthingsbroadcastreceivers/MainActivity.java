@@ -27,6 +27,8 @@ import android.widget.Button;
  * 2 -> When green button is pressed... toast is triggered by an implicit custom broadcast receiver registered dynamically
  * 3 -> When orange button is pressed... toast is triggered by an explicit custom broadcast receiver registered dynamically
  * 4 -> When red button is pressed... A chain of toasts are triggered by an ordered broadcast registered dynamically
+ *
+ * Local broadcast manager is deprecated and so, its not here!
  */
 
 /* Rule of thumb for DYNAMIC broadcast receiver (applicable to most cases... not all cases... this is not universal)
