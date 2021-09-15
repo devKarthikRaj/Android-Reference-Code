@@ -8,14 +8,15 @@
     android:background="#000000">
 
     <Button
-        android:id="@+id/BTN_Send_Custom_Broadcast"
+        android:id="@+id/BTN_Send_Implicit_Custom_Broadcast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send custom broadcast receiver"
+        android:text="Send implicit custom broadcast receiver"
         android:backgroundTint="#81f542"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

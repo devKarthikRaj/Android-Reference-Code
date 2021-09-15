@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-//This is a custom broadcast receiver... you can send a broadcast for anything that's not already available as a system broadcast!
+//This is an implicit custom broadcast receiver... you can send a broadcast for anything that's not already available as a system broadcast!
 public class CustomBroadcastReceiver extends BroadcastReceiver {
     @Override
     //This method will run when custom broadcast receiver is triggered...
