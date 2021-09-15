@@ -23,7 +23,7 @@
         android:id="@+id/BTN_Send_Explicit_Custom_Broadcast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="#fcba03"
         android:text="Send explicit custom broadcast receiver"
         android:textColor="#000000"
@@ -31,5 +31,18 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BTN_Send_Implicit_Custom_Broadcast" />
+
+    <Button
+        android:id="@+id/BTN_Send_Ordered_Broadcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#eb4034"
+        android:text="Send ordered broadcast receiver"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BTN_Send_Explicit_Custom_Broadcast" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

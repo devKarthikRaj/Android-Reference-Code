@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <!-- register explicit custom broadcast receiver -->
+        <!-- No action here so this is explicit -->
         <receiver android:name=".ExplicitCustomBroadcastReceiver" />
     </application>
 
