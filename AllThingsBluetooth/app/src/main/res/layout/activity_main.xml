@@ -58,9 +58,9 @@
 
                 <EditText
                     android:id="@+id/et_message_to_send"
-                    android:layout_width="350dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="13"
                     android:text="@string/et_message_to_send_text"
                     android:textColor="@color/colorPrimary"
                     android:textColorHighlight="@color/colorAccent"
