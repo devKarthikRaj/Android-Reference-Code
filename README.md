@@ -28,8 +28,8 @@ ___
 ## Useful Links
 [Google Maven Repository](https://maven.google.com/web/index.html) <br>
 If you are looking for dependency versions to add to your gradle and can't find the correct/latest dependency version... Use this link! <br>
-[ps: I had no idea this website existed until about a year into android dev... Hope it helps!!!] <b4>
-	
+[ps: I had no idea this website existed until about a year into android dev... Hope it helps!!!] <br>
+
 ___
 
 ## Questions and Requests <br>
