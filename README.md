@@ -13,16 +13,23 @@ ___
 [Bluetooth](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBluetooth) <br>
 [Broadcast Receivers](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBroadcastReceivers) <br>
 [Notifications](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNotifications) <br>
+[Palette](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPalette) <br>
 [Pop Up Dialog](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPopUpDialog) <br>
 [Recycler View](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsRecyclerView) <br>
 [Async Task](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsAsyncTask) <br>
 
 ### Upcoming Reference Code
+Google Maps <br>
 Service <br>
 Threads <br>
-Palette <br>
-Google Maps <br>
 
+___
+
+## Useful Links
+[Google Maven Repository](https://maven.google.com/web/index.html) <br>
+If you are looking for dependency versions to add to your gradle and can't find the correct/latest dependency version... Use this link! <br>
+[ps: I had no idea this website existed until about a year into android dev... Hope it helps!!!] <b4>
+	
 ___
 
 ## Questions and Requests <br>

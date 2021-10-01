@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#000000" >
+
+    <LinearLayout
+        android:id="@+id/LL_root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/TV_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Swatch"
+            android:textColor="#fcba03"
+            android:textSize="45sp" />
+
+        <ImageView
+            android:id="@+id/IV_test_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pic1"/>
+
+        <TextView
+            android:id="@+id/TV_body"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            android:text="Body Text  Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text Body Text "
+            android:textColor="@android:color/holo_red_light" />
+        <Button
+            android:id="@+id/BTN_next_swatch_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next Swatch"
+            android:backgroundTint="#fcba03"
+            android:textColor="#000000"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/BTN_next_image_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next Image"
+            android:backgroundTint="#fcba03"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
