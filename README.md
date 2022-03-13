@@ -17,11 +17,11 @@ ___
 [Palette](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPalette) <br>
 [Pop Up Dialog](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPopUpDialog) <br>
 [Recycler View](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsRecyclerView) <br>
+[Threads](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsThreads) <br>
 
 ### Upcoming Reference Code
 Google Maps <br>
 Service <br>
-Threads <br>
 
 ___
 
