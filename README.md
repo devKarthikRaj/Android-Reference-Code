@@ -22,7 +22,7 @@ ___
 ### Upcoming Reference Code
 Services <br>
 Fragments <br>
-Bottom Navigatiosn Bar <br>
+Bottom Navigation Bar <br>
 Top Navigation Bar <br>
 Navigation Drawer <br>
 Google Maps <br>
