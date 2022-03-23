@@ -20,8 +20,12 @@ ___
 [Threads](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsThreads) <br>
 
 ### Upcoming Reference Code
+Services <br>
+Fragments <br>
+Bottom Navigatiosn Bar <br>
+Top Navigation Bar <br>
+Navigation Drawer <br>
 Google Maps <br>
-Service <br>
 
 ___
 
