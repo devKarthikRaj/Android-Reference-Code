@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ForegroundServiceActivity"
+    android:background="#000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/ET_Foreground_Service_Notification_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Notification Display Text"
+            android:layout_margin="20dp"
+            android:textColor="#42bcf5"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/BTN_Start_Foreground_Service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Foreground Service"
+            android:backgroundTint="#42bcf5"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/BTN_Stop_Foreground_Service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stop Foreground Service"
+            android:layout_margin="20dp"
+            android:backgroundTint="#42bcf5"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

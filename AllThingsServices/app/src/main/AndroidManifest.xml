@@ -2,12 +2,39 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.raj.allthingsservices">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <!-- What is android:name in the <application> tag? When the application process is started... this class is instantiated before
+        any of the application's components... Its basically a class that runs at the start of the app's lifecycle -->
     <application
+        android:name=".BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AllThingsServices" />
+        android:theme="@style/Theme.AllThingsServices">
+        <activity
+            android:name=".BoundServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BackgroundServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForegroundServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".ForegroundService" /> <!-- Android 11 onwards need to have this permission to use foreground services -->
+
+    </application>
 
 </manifest>
