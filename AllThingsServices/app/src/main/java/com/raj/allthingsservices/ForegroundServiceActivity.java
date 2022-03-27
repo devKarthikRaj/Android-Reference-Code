@@ -33,17 +33,17 @@ public class ForegroundServiceActivity extends AppCompatActivity implements View
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.BTN_Start_Foreground_Service:
-                startService(view);
+                startForegroundService(view);
                 break;
             case R.id.BTN_Stop_Foreground_Service:
-                stopService(view);
+                stopForegroundService(view);
                 break;
         }
     }
 
     //This method starts the foreground service and passes a string to the service
     //Passing a string is not necessary... It is done here just to demonstrate how to do so if required
-    public void startService(View v) {
+    public void startForegroundService(View v) {
         String input = etForegroundServiceNotifText.getText().toString();
 
         //With the service intent... we can run or stop our service class!
@@ -63,7 +63,7 @@ public class ForegroundServiceActivity extends AppCompatActivity implements View
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
-    public void stopService(View v) {
+    public void stopForegroundService(View v) {
         Intent serviceIntent = new Intent(this, ForegroundService.class);
         stopService(serviceIntent);
     }

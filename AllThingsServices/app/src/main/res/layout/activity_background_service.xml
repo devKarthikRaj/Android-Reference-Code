@@ -4,7 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BackgroundServiceActivity"
-    android:background="#000">
+    android:background="#000"
+    tools:context=".BackgroundServiceActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/BTN_Start_Background_Service"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Start Background Service"
+            android:backgroundTint="#42bcf5"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <Button
+            android:id="@+id/BTN_Stop_Background_Service"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Stop Background Service"
+            android:backgroundTint="#42bcf5"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="See logcat to see the background service running..."
+            android:textColor="#42bcf5"
+            android:textSize="20sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

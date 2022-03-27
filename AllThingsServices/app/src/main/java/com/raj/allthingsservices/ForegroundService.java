@@ -13,11 +13,13 @@ import androidx.core.app.NotificationCompat;
 
 public class ForegroundService extends Service {
 
+    //onCreate is triggered the FIRST time we create our service
     @Override
     public void onCreate() {
         super.onCreate();
     }
 
+    //The onStartCommand method is triggered when we start our service.. That is whenever we call startService
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
@@ -48,6 +50,7 @@ public class ForegroundService extends Service {
         return START_NOT_STICKY; //Here just use not sticky cuz we really care what happens to the service if android kills it
     }
 
+    //This method is called when stopService is called
     @Override
     public void onDestroy() {
         super.onDestroy();

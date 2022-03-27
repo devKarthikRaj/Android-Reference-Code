@@ -34,7 +34,7 @@
         </activity>
 
         <service android:name=".ForegroundService" /> <!-- Android 11 onwards need to have this permission to use foreground services -->
-
+        <service android:name=".BackgroundService" />
     </application>
 
 </manifest>
