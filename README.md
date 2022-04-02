@@ -16,7 +16,7 @@ You'll have to look through all the classes and understand how they work before 
 ## Gallery <br>
 <div align="center">
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Async%20Task.jpg" alt="Async Task" width="19%" />
-	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Bluetooth.jpg" alt="Bluetooth" width="18.8%" />
+	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Bluetooth.jpg" alt="Bluetooth" width="18.7%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Broadcast%20Receivers.jpg" alt="Broadcast Receivers" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Fragments.jpg" alt="Fragments" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Notifications.jpg" alt="Notifications" width="19%" />
