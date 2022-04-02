@@ -1,18 +1,24 @@
 # Android Reference Code
 ## What? <br>
-This repository contains android code in Java for your reference! You can literally copy and paste the code from here into your project and expect it to work (you'll probably have to tweak it here and there just a lil' bit).
-Don't get me wrong, I am against blindly copying code, understand what you copy and all will be fine! 
+This repository contains android code in Java for YOUR reference!
+
+Looked through a gazillion YouTube videos? So many of those videos out there don't even have a link to the source code. In some videos, the text is so small that you gotta squint. WARNING: Squinting all night is not good for your eyes!
+
+Don't fret it! I've watched those YouTube videos for you and unfortunately I've also done all the squinting for you! So do yourself a favor and just refer to my code! 
 
 ## Why? <br>
-Well, there is a lot of code out there that's extremely hard to port into your project. Initially, I created this for my own reference but why not give back to the community that got me through so many school projects? So here it is!
+There is a lot of code out there that's extremely hard to port into your project. Initially, I created this for my own reference but why not give back to the community that got me through so many school projects? So here it is!
 
+## How to use? <br>
+I don't encourage blindly copying the code here though... Understand what you copy and all will be fine.
+You'll have to look through all the classes and understand how they work before you port it into your project. I've kept everything as simple as possible so it won't take you long to understand the code.
 ___
 
 ## Contents <br>
-### Existing Reference Code <br>
 [Async Task](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsAsyncTask) <br>
 [Bluetooth](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBluetooth) <br>
 [Broadcast Receivers](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBroadcastReceivers) <br>
+[Fragments](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsFragments) <br>
 [Notifications](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNotifications) <br>
 [Palette](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPalette) <br>
 [Pop Up Dialog](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPopUpDialog) <br>
@@ -20,8 +26,7 @@ ___
 [Services](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsServices) <br>
 [Threads](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsThreads) <br>
 
-### Upcoming Reference Code
-Fragments <br>
+### Coming soon...
 Bottom Navigation Bar <br>
 Top Navigation Bar <br>
 Navigation Drawer <br>
@@ -32,8 +37,3 @@ ___
 ## Useful Links
 [Android For Developers](https://developer.android.com/) <br>
 [Google Maven Repository](https://maven.google.com/web/index.html) <br>
-
-___
-
-## Questions and Requests <br>
-Drop me a message on [LinkedIn](https://www.linkedin.com/in/karthikraj-eee/) and I'll get back to you as soon as I can!
