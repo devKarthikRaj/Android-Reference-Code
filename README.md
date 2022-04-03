@@ -42,8 +42,7 @@ ___
 [Threads](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsThreads) <br>
 
 #### Coming soon... 
-Bottom Navigation Bar <br>
-Top Navigation Bar <br>
+Bottom and Top Navigation Bar <br>
 Navigation Drawer <br>
 Google Maps <br>
 
