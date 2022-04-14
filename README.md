@@ -32,6 +32,7 @@ ___
 ## Contents <br>
 [Async Task](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsAsyncTask) <br>
 [Bluetooth](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBluetooth) <br>
+[Bottom Nav Bar](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBottomNavigationBar) <br>
 [Broadcast Receivers](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBroadcastReceivers) <br>
 [Fragments](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsFragments) <br>
 [Notifications](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNotifications) <br>
@@ -42,7 +43,7 @@ ___
 [Threads](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsThreads) <br>
 
 #### Coming soon... 
-Bottom and Top Navigation Bar <br>
+Top Navigation Bar <br>
 Navigation Drawer <br>
 Google Maps <br>
 
