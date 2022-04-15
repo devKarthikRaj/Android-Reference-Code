@@ -11,7 +11,7 @@ There is a lot of code out there that's extremely hard to port into your project
 
 ## How to use? <br>
 I don't encourage blindly copying the code here though... Understand what you copy and all will be fine.
-You'll have to look through all the classes and understand how they work before you port it into your project. I've kept everything as simple as possible so it won't take you long to understand the code.
+You'll have to look through all the java classes and understand how they work before you port it into your project. I've kept everything as simple as possible so it won't take you long to understand the code.
 
 ## Gallery <br>
 <div align="center">
