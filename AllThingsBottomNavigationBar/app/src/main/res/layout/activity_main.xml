@@ -26,6 +26,8 @@
         app:menu="@menu/bottom_nav_bar_menu"
         android:background="#000"
         android:visibility="visible"
-        android:backgroundTint="#fff"/>
+        android:backgroundTint="#fff"
+        app:itemIconTint="@color/bottom_nav_selector"
+        app:itemTextColor="@color/bottom_nav_selector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

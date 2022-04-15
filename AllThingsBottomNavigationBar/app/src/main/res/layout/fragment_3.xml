@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment3"
-    android:background="#d90d58">
+    android:background="#000">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fragment 3"
         android:textSize="32sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:textColor="#d90d58"/>
 
 </FrameLayout>

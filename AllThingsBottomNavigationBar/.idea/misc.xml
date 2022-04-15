@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.1" />
+        <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
+        <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
+        <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1" />
         <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/layout/fragment_1.xml" value="0.225" />
         <entry key="..\:/MAD/AndroidStudioProjects/AndroidReferenceCode/AllThingsBottomNavigationBar/app/src/main/res/layout/fragment_2.xml" value="0.225" />
