@@ -43,8 +43,7 @@ ___
 [Services](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsServices) <br>
 [Threads](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsThreads) <br>
 
-#### Coming soon... 
-Top Navigation Bar <br>
+#### Coming soon...
 Navigation Drawer <br>
 Google Maps <br>
 
