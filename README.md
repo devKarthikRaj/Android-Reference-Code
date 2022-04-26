@@ -9,10 +9,6 @@ Don't fret it! I've watched those YouTube videos for you and unfortunately I've 
 ## Why? <br>
 There is a lot of code out there that's extremely hard to port into your project. Initially, I created this for my own reference but why not give back to the community that got me through so many school projects? So here it is!
 
-## How to use? <br>
-I don't encourage blindly copying the code here though... Understand what you copy and all will be fine.
-You'll have to look through all the java classes and understand how they work before you port it into your project. I've kept everything as simple as possible so it won't take you long to understand the code.
-
 ## Gallery <br>
 <div align="center">
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Async%20Task.jpg" alt="Async Task" width="19%" />
@@ -20,7 +16,7 @@ You'll have to look through all the java classes and understand how they work be
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Bottom%20Nav%20Bar.jpg" alt="Bottom Nav Bar" width="18.6%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Broadcast%20Receivers.jpg" alt="Broadcast Receivers" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Fragments.jpg" alt="Fragments" width="19%" />
-	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Nav%20Drawer.jpg" alt="Nav Drawer" width="18.7%" />
+	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Nav%20Drawer.jpg" alt="Nav Drawer" width="18.6%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Notifications.jpg" alt="Notifications" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Palette.jpg" alt="Palette" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Pop%20Up%20Dialog.jpg" alt="Pop Up Dialog" width="19%" />
