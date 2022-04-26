@@ -33,7 +33,7 @@ ___
 [Bottom Nav Bar](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBottomNavigationBar) <br>
 [Broadcast Receivers](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsBroadcastReceivers) <br>
 [Fragments](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsFragments) <br>
-[Navigation Drawer](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNavigationDrawer)<br>
+[Nav Drawer](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNavigationDrawer)<br>
 [Notifications](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsNotifications) <br>
 [Palette](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPalette) <br>
 [Pop Up Dialog](https://github.com/devKarthikRaj/Android-Reference-Code/tree/master/AllThingsPopUpDialog) <br>
