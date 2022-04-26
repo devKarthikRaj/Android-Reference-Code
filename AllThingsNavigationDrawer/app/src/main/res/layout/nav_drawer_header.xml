@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:background="#ebb134"
+    android:gravity="bottom"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <!-- 176dp is the default height for nav header in android... So we hardcore it here... Can change if req -->
+    <!-- Gravity is bottom cuz we want all header components to be aligned to the bottom -->
+    <!-- For theme... We needa set ThemeOverlay... Its for this kinda nav drawer stuff -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/noddy_profile_pic_round" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Make way for noddy NODDY!"
+        android:textSize="14sp"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Stop in the name of Plod!"
+        android:textSize="14sp"
+        android:textColor="#000" />
+</LinearLayout>

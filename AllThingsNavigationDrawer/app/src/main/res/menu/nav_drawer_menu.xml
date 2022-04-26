@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragment1"
+            android:icon="@drawable/car_nav_drawer_icon"
+            android:title="Fragment 1" />
+        <item
+            android:id="@+id/fragment2"
+            android:icon="@drawable/flight_nav_drawer_icon"
+            android:title="Fragment 2" />
+        <item
+            android:id="@+id/fragment3"
+            android:icon="@drawable/boat_nav_drawer_icon"
+            android:title="Fragment 3" />
+    </group>
+
+    <!-- The stuff above brings you to a new fragment when clicked -->
+    <!-- The stuff performs an action when clicked like sharing something or sending something -->
+    <!-- Yeah but here we're just gonna show a toast msg for simplicity's sake-->
+
+    <item android:title="Clickable Items">
+        <menu>
+            <item
+                android:id="@+id/nav_clickable_item_1"
+                android:icon="@drawable/bus_nav_drawer_icon"
+                android:title="Clickable Item 1" />
+            <item
+                android:id="@+id/nav_clickable_item_2"
+                android:icon="@drawable/train_nav_drawer_icon"
+                android:title="Clickable Item 2" />
+        </menu>
+    </item>
+</menu>

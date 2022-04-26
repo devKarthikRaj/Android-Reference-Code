@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <!-- Change parent to blablabla.NoActionBar - Make sure you have the no action bar -->
+    <!-- The no action bar gets rid of the action bar... Nav drawer cannot be implemented with the normal action bar -->
+    <!-- We need a toolbar to implement nav drawer... A toolbar is an advanced action bar -->
+    <style name="Theme.AllThingsNavigationDrawer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">#3260a8</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
