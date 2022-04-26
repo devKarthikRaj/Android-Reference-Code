@@ -20,7 +20,7 @@ You'll have to look through all the java classes and understand how they work be
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Bottom%20Nav%20Bar.jpg" alt="Bottom Nav Bar" width="18.6%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Broadcast%20Receivers.jpg" alt="Broadcast Receivers" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Fragments.jpg" alt="Fragments" width="19%" />
-	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Nav%20Drawer.jpg" alt="Nav Drawer" width="19%" />
+	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Nav%20Drawer.jpg" alt="Nav Drawer" width="18.7%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Notifications.jpg" alt="Notifications" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Palette.jpg" alt="Palette" width="19%" />
 	<img src="https://github.com/devKarthikRaj/Android-Reference-Code/blob/master/Media/Pop%20Up%20Dialog.jpg" alt="Pop Up Dialog" width="19%" />
