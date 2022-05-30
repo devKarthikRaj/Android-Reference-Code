@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="map_key" translatable="false">
-        AIzaSyAqtlstJKVDgrgs93fevm0sdcyqtblyi6A
+        <!-- API key goes here -->
     </string>
 </resources>
